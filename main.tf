@@ -11,7 +11,9 @@ resource "null_resource" "build_and_push" {
 
   # See build.sh for more details
   provisioner "local-exec" {
-    command = "${path.module}/bin/build.sh ${var.dockerfile_folder} ${var.ecr_repository_url}:${var.docker_image_tag} ${var.aws_region} ${var.aws_profile}"
+    command = <<EOF
+    "${path.module}/bin/build.sh ${var.dockerfile_folder} ${var.ecr_repository_url}:${var.docker_image_tag} ${var.aws_region} ${var.aws_profile}"
+    EOF
   }
 }
 
